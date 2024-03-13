@@ -1,8 +1,8 @@
 #!/bin/bash
 
-HEIMDALL_URL="http://polygon_heimdall_daemon-bor-1:26657/status"
-HEIMDALL_URL="http://localhost:26657/status"
-BOR_URL="http://polygon_bor-bor-1:8545/"
+#HEIMDALL_URL="http://polygon_heimdall_daemon-bor-1:26657/status"
+#HEIMDALL_URL="http://localhost:26657/status"
+#BOR_URL="http://polygon_bor-bor-1:8545/"
 
 log() {
   echo "{\"datetime\":\"$(date -u --iso-8601=ns)\", \"type\":\"$1\", \"version\":\"$APP_VERSION\", $2}" > /dev/stderr
