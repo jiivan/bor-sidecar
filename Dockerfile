@@ -8,5 +8,5 @@ ARG GITHUB_REF_NAME
 ENV APP_VERSION=$GITHUB_REF_NAME
 WORKDIR /app
 
-COPY ./src/monitor.sh /app/
-CMD /app/monitor.sh
+COPY ./src/monitor.bash /app/
+CMD /app/monitor.bash
