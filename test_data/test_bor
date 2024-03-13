@@ -1,0 +1,22 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "currentBlock": "0x2eebf",
+    "healedBytecodeBytes": "0x0",
+    "healedBytecodes": "0x0",
+    "healedTrienodeBytes": "0x0",
+    "healedTrienodes": "0x0",
+    "healingBytecode": "0x0",
+    "healingTrienodes": "0x0",
+    "highestBlock": "0x1d4ee3e",
+    "startingBlock": "0x0",
+    "syncedAccountBytes": "0x0",
+    "syncedAccounts": "0x0",
+    "syncedBytecodeBytes": "0x0",
+    "syncedBytecodes": "0x0",
+    "syncedStorage": "0x0",
+    "syncedStorageBytes": "0x0"
+  }
+}
+

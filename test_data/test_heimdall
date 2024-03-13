@@ -1,0 +1,38 @@
+{
+  "jsonrpc": "2.0",
+  "id": "",
+  "result": {
+    "node_info": {
+      "protocol_version": {
+        "p2p": "7",
+        "block": "10",
+        "app": "0"
+      },
+      "id": "0698e2f205de0ffbe4ca215e19b2ee7275d2c334",
+      "listen_addr": "tcp://0.0.0.0:26656",
+      "network": "heimdall-137",
+      "version": "0.32.7",
+      "channels": "4020212223303800",
+      "moniker": "examplenode01",
+      "other": {
+        "tx_index": "on",
+        "rpc_address": "tcp://0.0.0.0:26657"
+      }
+    },
+    "sync_info": {
+      "latest_block_hash": "812700055F33B175CF90C870B740D01B0C5B5DCB8D22376D2954E1859AF30458",
+      "latest_app_hash": "83A1568E85A1D942D37FE5415F3FB3CBD9DFD846A42CBC247DFD6ABB9CE7E606",
+      "latest_block_height": "16130",
+      "latest_block_time": "2020-05-31T17:06:31.350723885Z",
+      "catching_up": true
+    },
+    "validator_info": {
+      "address": "3C6058AF387BB74D574582C2BEEF377E7A4C0238",
+      "pub_key": {
+        "type": "tendermint/PubKeySecp256k1",
+        "value": "BOIKA6z1q3l5iSJoaAiagWpwUw3taAhiEMyZ9ffxAMznas2GU1giD5YmtnrB6jzp4kkIqv4tOmuGYILSdy9+wYI="
+      },
+      "voting_power": "0"
+    }
+  }
+}
