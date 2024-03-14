@@ -16,6 +16,7 @@ fetch_heimdall() {
   TEMP_FILE=$(mktemp bor-sidecar-heimdall.XXXXXX)
   if ! curl -sf $HEIMDALL_URL -o $TEMP_FILE; then
     log self "\"error\":\"HEIMDALL curl failed\"";
+    rm $TEMP_FILE
     return 1
   fi
   HEIMDALL_VERSION=$(cat $TEMP_FILE | jq -r .result.node_info.version)
@@ -30,6 +31,7 @@ fetch_bor() {
   TEMP_FILE=$(mktemp bor-sidecar-bor.XXXXXX)
   if ! curl -sf $BOR_URL --header 'Content-Type: application/json' -d '{"jsonrpc":"2.0", "method":"eth_syncing", "params":[], "id":1}' -o $TEMP_FILE; then
     log self "\"error\":\"BOR curl failed\""
+    rm $TEMP_FILE
     return 1
   fi
   BLOCK_CURRENT=$(cat $TEMP_FILE | jq -r .result.currentBlock)
