@@ -15,7 +15,7 @@ log self "\"SLEEP\": \"$SLEEP\", \"HEIMDALL_URL\": \"$HEIMDALL_URL\", \"BOR_URL\
 fetch_heimdall() {
   TEMP_FILE=$(mktemp bor-sidecar-heimdall.XXXXXX)
   if ! curl -sf $HEIMDALL_URL -o $TEMP_FILE; then
-    log self "\"error\":\"HEIMDALL curl failed\"";
+    log self "\"error\":\"HEIMDALL curl failed\", \"url\":\"$HEIMDALL_URL\"";
     rm $TEMP_FILE
     return 1
   fi
@@ -24,20 +24,20 @@ fetch_heimdall() {
   BLOCK_HEIGHT=$(cat $TEMP_FILE | jq -r .result.sync_info.latest_block_height)
   CATCHING_UP=$(cat $TEMP_FILE | jq -r .result.sync_info.catching_up)
   rm $TEMP_FILE
-  log heimdall "\"block_time\":\"$BLOCK_TIME\", \"block_height\":\"$BLOCK_HEIGHT\", \"catching_up\":$CATCHING_UP, \"heimdall_version\":\"$HEIMDALL_VERSION\""
+  log heimdall "\"block_time\":\"$BLOCK_TIME\", \"block_height\":\"$BLOCK_HEIGHT\", \"catching_up\":$CATCHING_UP, \"heimdall_version\":\"$HEIMDALL_VERSION\", \"url\":\"$HEIMDALL_URL\""
 }
 
 fetch_bor() {
   TEMP_FILE=$(mktemp bor-sidecar-bor.XXXXXX)
   if ! curl -sf $BOR_URL --header 'Content-Type: application/json' -d '{"jsonrpc":"2.0", "method":"eth_syncing", "params":[], "id":1}' -o $TEMP_FILE; then
-    log self "\"error\":\"BOR curl failed\""
+    log self "\"error\":\"BOR curl failed\, \"url\":\"$BOR_URL\"""
     rm $TEMP_FILE
     return 1
   fi
   BLOCK_CURRENT=$(cat $TEMP_FILE | jq -r .result.currentBlock)
   BLOCK_HIGHEST=$(cat $TEMP_FILE | jq -r .result.highestBlock)
   rm $TEMP_FILE
-  log bor "\"block_current\":$(printf "%d" $BLOCK_CURRENT), \"block_highest\":$(printf "%d" $BLOCK_HIGHEST)"
+  log bor "\"block_current\":$(printf "%d" $BLOCK_CURRENT), \"block_highest\":$(printf "%d" $BLOCK_HIGHEST), \"url\":\"$BOR_URL\""
 }
 
 while true; do
