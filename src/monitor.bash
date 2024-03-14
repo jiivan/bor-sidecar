@@ -1,5 +1,6 @@
 #!/bin/bash
 
+${SLEEP:=600}
 #HEIMDALL_URL="http://polygon_heimdall_daemon-bor-1:26657/status"
 #HEIMDALL_URL="http://localhost:26657/status"
 #BOR_URL="http://polygon_bor-bor-1:8545/"
@@ -31,7 +32,7 @@ fetch_bor() {
 while true; do
   fetch_bor
   fetch_heimdall
-  sleep 600
+  sleep $SLEEP
 done
 
 # vim: set et ai sts=2 sw=2 :
