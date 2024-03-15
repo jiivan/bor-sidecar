@@ -30,7 +30,7 @@ fetch_heimdall() {
 fetch_bor() {
   TEMP_FILE=$(mktemp bor-sidecar-bor.XXXXXX)
   if ! curl -sf $BOR_URL --header 'Content-Type: application/json' -d '{"jsonrpc":"2.0", "method":"eth_syncing", "params":[], "id":1}' -o $TEMP_FILE; then
-    log self "\"error\":\"BOR curl failed\, \"url\":\"$BOR_URL\"""
+    log self "\"error\":\"BOR curl failed\", \"url\":\"$BOR_URL\""
     rm $TEMP_FILE
     return 1
   fi
