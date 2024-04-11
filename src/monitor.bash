@@ -29,15 +29,18 @@ fetch_heimdall() {
 
 fetch_bor() {
   TEMP_FILE=$(mktemp bor-sidecar-bor.XXXXXX)
-  if ! curl -sf $BOR_URL --header 'Content-Type: application/json' -d '{"jsonrpc":"2.0", "method":"eth_syncing", "params":[], "id":1}' -o $TEMP_FILE; then
+  if ! curl -sf $BOR_URL --header 'Content-Type: application/json' -d '{"jsonrpc":"2.0", "method":"eth_getBlockByNumber", "params":["latest", false], "id":1}' -o $TEMP_FILE; then
     log self "\"error\":\"BOR curl failed\", \"url\":\"$BOR_URL\""
     rm $TEMP_FILE
     return 1
   fi
-  BLOCK_CURRENT=$(cat $TEMP_FILE | jq -r .result.currentBlock)
-  BLOCK_HIGHEST=$(cat $TEMP_FILE | jq -r .result.highestBlock)
+  TIMESTAMP=$(date +%s)
+  BLOCK_CURRENT=$(cat $TEMP_FILE | jq -r .result.number)
+  BLOCK_TIMESTAMP=$(cat $TEMP_FILE | jq -r .result.timestamp)
   rm $TEMP_FILE
-  log bor "\"block_current\":$(printf "%d" $BLOCK_CURRENT), \"block_highest\":$(printf "%d" $BLOCK_HIGHEST), \"url\":\"$BOR_URL\""
+  BLOCK_TIMESTAMP_DECIMAL=$(printf "%d" $BLOCK_TIMESTAMP)
+  BLOCK_AGE=$((TIMESTAMP-BLOCK_TIMESTAMP_DECIMAL))
+  log bor "\"block_current\":$(printf "%d" $BLOCK_CURRENT), \"block_age\":$BLOCK_AGE, \"url\":\"$BOR_URL\""
 }
 
 while true; do
